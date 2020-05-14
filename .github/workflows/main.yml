@@ -23,7 +23,7 @@ jobs:
         with:
             ruby-version: '2.5' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
       - run: | 
-              cd poi
+              cd poi,
               bundle install
   test:
     runs-on: ubuntu-latest
