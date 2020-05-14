@@ -32,6 +32,6 @@ jobs:
               docker-compose run web rails db:migrate
       - name: Run tests
         run: |
-              gem install bundler
+              gem update bundler
               bundle env
               bundle exec bin/rspec --format doc
