@@ -21,5 +21,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-ruby@v1
         with:
-            ruby-version: '2.6' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
-      - run: echo "Hello World"
+            ruby-version: '2.5.1' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
+      - run: bundle install
+      - run: bin/rspec --format doc
