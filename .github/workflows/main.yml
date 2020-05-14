@@ -25,13 +25,13 @@ jobs:
         with:
             ruby-version: '2.5' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
       - name: Install dependencies
-            - run: |
+            run: |
               sudo apt-get -yqq install libpq-dev
               gem install bundler
               bundle install
       - name: Create and migrate DB
-            - run: | 
+            run: | 
               rails db:create
               rails db:migrate
       - name: Run tests
-            - run: bin/rspec --format doc
+            run: bin/rspec --format doc
