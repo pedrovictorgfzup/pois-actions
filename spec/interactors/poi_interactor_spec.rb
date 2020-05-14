@@ -17,7 +17,7 @@ RSpec.describe PoiInteractor do
     end
 
     it "should create a new poi" do
-        result_succes, result = PoiInteractor.instance.create_new_poi({name:"poi para ser deletada", x:10, y:10})
+        result_succes, result = PoiInteractor.instance.create_new_poi({name:"poi para ser deletada", x:10, y:10, id:400})
 
         expect(result_succes).to eq(true)
     end
@@ -41,9 +41,9 @@ RSpec.describe PoiInteractor do
     it "should return the other poi's that are inside the radius from any given point" do
         all_pois = PoiInteractor.instance.get_all
 
-        result = PoiInteractor.instance.get_pois_inside_radius(15,40,5)
+        result = PoiInteractor.instance.get_pois_inside_radius(12,12,5)
 
         expect(result).to_not be_nil
-        expect(result.size).to be == 2
+        expect(result.size).to be == 1
     end
 end 
