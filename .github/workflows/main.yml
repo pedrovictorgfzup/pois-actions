@@ -28,4 +28,10 @@ jobs:
               sudo apt-get -yqq install libpq-dev
               gem install bundler
               bundle install
+<<<<<<< Updated upstream
       - run: bin/rspec --format doc
+=======
+              rails db:create
+              rails db:migrate
+              bin/rspec --format doc
+>>>>>>> Stashed changes
