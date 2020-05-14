@@ -41,9 +41,9 @@ RSpec.describe PoiInteractor do
     it "should return the other poi's that are inside the radius from any given point" do
         all_pois = PoiInteractor.instance.get_all
 
-        result = PoiInteractor.instance.get_pois_inside_radius(10,10,20)
+        result = PoiInteractor.instance.get_pois_inside_radius(15,40,5)
 
         expect(result).to_not be_nil
-        expect(result.size).to be == 1
+        expect(result.size).to be == 2
     end
 end 

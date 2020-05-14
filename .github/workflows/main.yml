@@ -24,14 +24,11 @@ jobs:
       - uses: actions/setup-ruby@v1
         with:
             ruby-version: '2.5' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
-      - name: Install dependencies
+      - name: Deploying containers
         run: |
-              sudo apt-get -yqq install libpq-dev
-              gem install bundler
-              bundle install
-      - name: Create and migrate DB
-        run: | 
-              rails db:create
-              rails db:migrate
+              docker-compose build
+              docker-compose run web rails db:drop
+              docker-compose run web rails db:create
+              docker-compose run web rails db:migrate
       - name: Run tests
-        run: bin/rspec --format doc
+        run: bundle exec bin/rspec --format doc
