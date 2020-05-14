@@ -22,8 +22,9 @@ jobs:
       - uses: actions/setup-ruby@v1
         with:
             ruby-version: '2.5' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
-      - run: | 
-              cd poi,
+      - run: |
+              sudo apt-get -yqq install libpq-dev
+              gem install bundler
               bundle install
   test:
     runs-on: ubuntu-latest
