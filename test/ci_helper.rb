@@ -11,7 +11,7 @@ class Runner
         end
 
         def execute
-  
+            STDOUT.puts("Inspecting:\n- #{files.join("\n- ")}")
             if files.any?
                 STDOUT.puts("Inspecting:\n- #{files.join("\n- ")}")
 
