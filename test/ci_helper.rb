@@ -15,7 +15,7 @@ class Runner
             if files.any?
                 STDOUT.puts("Inspecting:\n- #{files.join("\n- ")}")
 
-                my_offense =  JSON.parse(`rubocop --format json #{files.join(' ')}`)
+                my_offense =  JSON.parse(`rubocop --format json`)
                 print my_offense["summary"], "\n"
                 master_offense = JSON.parse(master_offenses)
                 print master_offense["summary"], "\n"
@@ -50,7 +50,7 @@ class Runner
         def master_offenses
             # Open3.capture3('git checkout . && git checkout HEAD^')
             `git checkout . && git checkout HEAD^`
-            `rubocop --format json #{files.join(' ')}`
+            `rubocop --format json`
     #   RubcopOutputParser.call(master_raw_data)
         end
   
