@@ -11,16 +11,19 @@ class Runner
         end
 
         def execute
-            STDOUT.puts("Inspecting:\n- #{files.join("\n- ")}")
+            
             if files.any?
                 STDOUT.puts("Inspecting:\n- #{files.join("\n- ")}")
 
                 my_offense =  JSON.parse(`rubocop --format json #{files.join(' ')}`)
                 print my_offense["summary"], "\n"
                 master_offense = JSON.parse(master_offenses)
+                print master_offense["summary"], "\n"
                 if my_offense["summary"]["offense_count"] > master_offense["summary"]["offense_count"]
+                    print("DEU ERRADO")
                     exit 1
                 else
+                    print("DEU CERTO")
                     exit 0
                 end
 
