@@ -35,16 +35,8 @@ jobs:
 
       - name: Run tests
         run: docker-compose run web bundle exec rspec --format doc
-  linter:
-    
+  rtc:
     runs-on: ubuntu-latest
-    
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install gems
-        run: |
-              sudo gem install rubocop
-              sudo gem install bundler -v 2.1.4
-              bundle install
-      - name: Rubocop linter
-        run: rubocop
+      steps:
+        - uses: actions/checkout@v1
+        - uses: gimmyxd/rtc-action@0.0.5
