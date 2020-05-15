@@ -60,7 +60,7 @@ class Runner
   
         def master_offenses
             # Open3.capture3('git checkout . && git checkout HEAD^')
-            `git checkout . && git checkout HEAD^`
+            `git checkout . && git checkout HEAD~1`
             `rubocop --format json`
     #   RubcopOutputParser.call(master_raw_data)
         end
