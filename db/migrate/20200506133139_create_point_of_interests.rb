@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreatePointOfInterests < ActiveRecord::Migration[6.0]
   def change
     create_table :point_of_interests do |t|

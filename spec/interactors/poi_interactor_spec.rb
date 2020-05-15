@@ -1,49 +1,48 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-
 RSpec.describe PoiInteractor do
+  it 'should return all pois' do
+    result = PoiInteractor.instance.get_all
 
-    it "should return all pois" do
+    expect(result.size).to be == 3
+  end
 
-        result = PoiInteractor.instance.get_all 
+  it 'should find a poi by the id' do
+    result = PoiInteractor.instance.get_poi_by_id(1)
 
-        expect(result.size).to be == 3
-    end
+    expect(result).to_not be_nil
+  end
 
-    it "should find a poi by the id" do
-        result = PoiInteractor.instance.get_poi_by_id(1)
+  it 'should create a new poi' do
+    result_succes, result = PoiInteractor.instance.create_new_poi({ name: 'poi para ser deletada', x: 10, y: 10, id: 400 })
 
-        expect(result).to_not be_nil
-    end
+    expect(result_succes).to eq(true)
+  end
 
-    it "should create a new poi" do
-        result_succes, result = PoiInteractor.instance.create_new_poi({name:"poi para ser deletada", x:10, y:10, id:400})
+  it 'should update an existing poi' do
+    result_succes, result = PoiInteractor.instance.update_poi(1, { name: 'poi alterada', x: 10, y: 10 })
 
-        expect(result_succes).to eq(true)
-    end
+    expect(result_succes).to eq(true)
+  end
 
-    it "should update an existing poi" do
-        result_succes, result = PoiInteractor.instance.update_poi(1, {name:"poi alterada", x:10, y:10})
+  it 'should delete an existing poi' do
+    before_deletion = PoiInteractor.instance.get_all.size
 
-        expect(result_succes).to eq(true)
-    end
+    PoiInteractor.instance.delete_poi(1)
 
-    it "should delete an existing poi" do
-        before_deletion = PoiInteractor.instance.get_all.size
-        
-        PoiInteractor.instance.delete_poi(1)
+    after_deletion = PoiInteractor.instance.get_all.size
 
-        after_deletion = PoiInteractor.instance.get_all.size
-        
-        expect(after_deletion).to be < before_deletion
-    end
+    expect(after_deletion).to be < before_deletion
+  end
 
-    it "should return the other poi's that are inside the radius from any given point" do
-        all_pois = PoiInteractor.instance.get_all
+  it "should return the other poi's that are inside the radius from any given point" do
+    all_pois = PoiInteractor.instance.get_all
 
-        result = PoiInteractor.instance.get_pois_inside_radius(12,12,5)
+    result = PoiInteractor.instance.get_pois_inside_radius(12, 12, 5)
 
-        expect(result).to_not be_nil
-        expect(result.size).to be == 1
-    end
-end 
+    expect(result).to_not be_nil
+    expect(result.size).to be == 1
+  end
+end
