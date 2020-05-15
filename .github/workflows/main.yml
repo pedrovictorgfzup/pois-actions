@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FORCE_ERROR_EXIT: true
-        UPDATE_PR: true
+      UPDATE_PR: true
     steps:
       - uses: actions/checkout@v1
       - uses: gimmyxd/rtc-action@0.0.5
