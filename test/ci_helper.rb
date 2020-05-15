@@ -23,6 +23,9 @@ class Runner
                 print master_offense["summary"]
                 # print offenses[:new_offenses]
                 # `git checkout master`
+                if my_offense["summary"]["offense_count"] > master_offense["summary"]["offense_count"]
+                    print "OLOCO BIXO"
+                end
 
             else
                 STDOUT.puts('No files to inspect')
