@@ -15,10 +15,9 @@ class Runner
             if files.any?
                 STDOUT.puts("Inspecting:\n- #{files.join("\n- ")}")
 
-                STDOUT.puts(`git branch`)
                 my_offense =  JSON.parse(`rubocop --format json #{files.join(' ')}`)
+                print my_offense["summary"], "\n"
                 master_offense = JSON.parse(master_offenses)
-                STDOUT.puts(`git branch`)
                 if my_offense["summary"]["offense_count"] > master_offense["summary"]["offense_count"]
                     exit 1
                 else
