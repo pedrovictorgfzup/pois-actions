@@ -41,5 +41,7 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-      - run: bundle install
-      - run: gem install rubocop && rubocop
+      - run: |
+              gem install rubocop && rubocop
+              gem install bundler -v 2.1.4
+              bundle install
