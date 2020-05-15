@@ -11,21 +11,32 @@ class Runner
         end
 
         def execute
-            
-            if files.any?
-                STDOUT.puts("Inspecting:\n- #{files.join("\n- ")}")
+            my_offense =  JSON.parse(`rubocop --format json`)
+            print my_offense["summary"], "\n"
+            master_offense = JSON.parse(master_offenses)
+            print master_offense["summary"], "\n"
 
-                my_offense =  JSON.parse(`rubocop --format json`)
-                print my_offense["summary"], "\n"
-                master_offense = JSON.parse(master_offenses)
-                print master_offense["summary"], "\n"
-                if my_offense["summary"]["offense_count"] > master_offense["summary"]["offense_count"]
-                    print("DEU ERRADO")
-                    exit 1
-                else
-                    print("DEU CERTO")
-                    exit 0
-                end
+            if my_offense["summary"]["offense_count"] > master_offense["summary"]["offense_count"]
+                print("DEU ERRADO")
+                exit 1
+            else
+                print("DEU CERTO")
+                exit 0
+            end
+            # if files.any?
+            #     STDOUT.puts("Inspecting:\n- #{files.join("\n- ")}")
+
+            #     my_offense =  JSON.parse(`rubocop --format json`)
+            #     print my_offense["summary"], "\n"
+            #     master_offense = JSON.parse(master_offenses)
+            #     print master_offense["summary"], "\n"
+            #     if my_offense["summary"]["offense_count"] > master_offense["summary"]["offense_count"]
+            #         print("DEU ERRADO")
+            #         exit 1
+            #     else
+            #         print("DEU CERTO")
+            #         exit 0
+            #     end
 
 
             else
@@ -49,7 +60,7 @@ class Runner
   
         def master_offenses
             # Open3.capture3('git checkout . && git checkout HEAD^')
-            `git checkout . && git checkout HEAD^`
+            `git checkout master`
             `rubocop --format json`
     #   RubcopOutputParser.call(master_raw_data)
         end
