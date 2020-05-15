@@ -4,6 +4,8 @@ class Runner
 
     class << self
         def execute
+            commit_offenses = get_commit_offenses
+            previous_commit_offenses = get_previous_commit_offenses
             print commit_offenses["summary"], "\n"
             print previous_commit_offenses["summary"], "\n"
 
@@ -16,11 +18,11 @@ class Runner
             end
         end
 
-        def commit_offenses
+        def get_commit_offenses
             JSON.parse(`rubocop --format json`)
         end
   
-        def previous_commit_offenses
+        def get_previous_commit_offenses
             `git checkout . && git checkout HEAD^`
             JSON.parse(`rubocop --format json`)
         end
