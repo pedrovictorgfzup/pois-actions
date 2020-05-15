@@ -37,6 +37,6 @@ jobs:
         run: docker-compose run web bundle exec rspec --format doc
   rtc:
     runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v1
-        - uses: gimmyxd/rtc-action@0.0.5
+    steps:
+      - uses: actions/checkout@v1
+      - uses: gimmyxd/rtc-action@0.1.1
