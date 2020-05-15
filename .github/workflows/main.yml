@@ -44,7 +44,8 @@ jobs:
       - uses: actions/setup-ruby@v1
         with:
             ruby-version: '2.5.8' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
-      - name: install rubocop
-        run: gem install rubocop
-      - name: run rubocop
-        run: rubocop --format json
+      # - name: install rubocop
+      #   run: gem install rubocop
+      # - name: run rubocop
+      #   run: rubocop --format json
+      - run: ruby test/ci_helper.rb
