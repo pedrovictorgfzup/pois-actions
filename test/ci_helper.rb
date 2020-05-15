@@ -42,6 +42,7 @@ class Runner
             # else
             #     STDOUT.puts('No files to inspect')
             # end
+            print `git log`
         end
   
         private
