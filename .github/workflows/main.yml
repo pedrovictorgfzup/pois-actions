@@ -40,3 +40,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - uses: gimmyxd/rtc-action@0.1.1
+      env:
+        UPDATE_PR: true
+        FORCE_ERROR_EXIT: true
+
