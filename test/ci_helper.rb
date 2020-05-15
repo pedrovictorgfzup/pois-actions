@@ -22,7 +22,7 @@ class Runner
                 master_offense = JSON.parse(master_offenses)
                 print master_offense["summary"]
                 # print offenses[:new_offenses]
-                `git checkout master`
+                # `git checkout master`
 
             else
                 STDOUT.puts('No files to inspect')
