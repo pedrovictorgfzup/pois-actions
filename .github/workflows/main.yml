@@ -41,8 +41,10 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-      - run: |
+      - name: Install gems
+          run: |
               sudo gem install rubocop
               sudo gem install bundler -v 2.1.4
               bundle install
-              rubocop
+      - name: Rubocop linter
+          run: rubocop
