@@ -37,8 +37,6 @@ jobs:
         run: docker-compose run web bundle exec rspec --format doc
   rtc:
     runs-on: ubuntu-latest
-    env:
-      FORCE_ERROR_EXIT: true
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-ruby@v1
