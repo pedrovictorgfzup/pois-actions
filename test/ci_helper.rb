@@ -22,6 +22,7 @@ class Runner
                 master_offense = JSON.parse(master_offenses)
                 print master_offense["summary"]
                 # print offenses[:new_offenses]
+                `git checkout master`
 
             else
                 STDOUT.puts('No files to inspect')
@@ -44,7 +45,8 @@ class Runner
         end
   
         def master_offenses
-            Open3.capture3('git checkout . && git checkout HEAD^')
+            # Open3.capture3('git checkout . && git checkout HEAD^')
+            `git checkout . && git checkout HEAD^`
             `rubocop --format json #{files.join(' ')}`
     #   RubcopOutputParser.call(master_raw_data)
         end
