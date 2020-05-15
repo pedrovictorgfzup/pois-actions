@@ -15,14 +15,9 @@ class Runner
             if files.any?
                 STDOUT.puts("Inspecting:\n- #{files.join("\n- ")}")
 
-                # offenses[:new_offenses] ||=  `rubocop --format json #{files.join(' ')}`
-                print "\nAQUIIIIIIIIIIIIIIIII", files.join(' ')
                 my_offense =  JSON.parse(`rubocop --format json #{files.join(' ')}`)
-                print my_offense["summary"]
                 master_offense = JSON.parse(master_offenses)
-                print master_offense["summary"]
-                # print offenses[:new_offenses]
-                # `git checkout master`
+
                 if my_offense["summary"]["offense_count"] > master_offense["summary"]["offense_count"]
                     exit 1
                 else
@@ -41,7 +36,6 @@ class Runner
   
         def files
               @files ||= `git diff --name-only HEAD HEAD~1`.split("\n").select { |e| e =~ /.rb/ }
-            # @files ||= `git status`.split("\n").select { |e| e =~ /.rb/ }
 
         end
   
