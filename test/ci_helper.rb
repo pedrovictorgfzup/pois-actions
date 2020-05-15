@@ -39,9 +39,9 @@ class Runner
             #     end
 
 
-            else
-                STDOUT.puts('No files to inspect')
-            end
+            # else
+            #     STDOUT.puts('No files to inspect')
+            # end
         end
   
         private
