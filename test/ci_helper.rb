@@ -16,7 +16,7 @@ class Runner
             master_offense = JSON.parse(master_offenses)
             print master_offense["summary"], "\n"
 
-            print `git log`, '\n'
+            print `git log`, "\n"
             if my_offense["summary"]["offense_count"] > master_offense["summary"]["offense_count"]
                 print("DEU ERRADO")
                 exit 1
