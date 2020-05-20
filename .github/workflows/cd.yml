@@ -13,5 +13,11 @@ jobs:
         steps:
             - name: Olar
               run: echo "Olha o troxa" 
+              run: |
+                    array = ${{ github.event.pull_request.labels }}
+                    echo "${array[*]}"
+              run: |
+                    event = ${{ github.event}}
+                    echo "${event}"
 
     
