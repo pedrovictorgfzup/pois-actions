@@ -12,14 +12,9 @@ jobs:
         if: ${{ github.event_name == 'pull_request' && github.event.pull_request.labels[0].name == 'deploy'}}
         steps:
             - name: Olar
-              run: echo "Olha o troxa" 
               run: |
+                    echo "Olha o troxa" 
                     array = ${{ github.event.pull_request.labels }}
                     echo "${array[*]}"
-              run: |
                     event = ${{ github.event}}
                     echo "${event}"
-
-                    
-
-    
