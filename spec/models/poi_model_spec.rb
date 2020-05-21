@@ -26,6 +26,5 @@ RSpec.describe PointOfInterest do
     poi.x = 2
     poi.y = 3
     expect(poi).to be_invalid
-    
   end
 end
