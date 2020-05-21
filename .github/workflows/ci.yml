@@ -19,8 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       # - uses: ruby/setup-ruby@v1.33.1
-        with:
-            ruby-version: '2.5.8' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
+        # with:
+        #     ruby-version: '2.5.8' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
       - name: Deploying containers
         run: |
               docker-compose build
@@ -41,8 +41,8 @@ jobs:
         with:
           fetch-depth: 2
       # - uses: actions/setup-ruby@v1
-        with:
-            ruby-version: '2.5.8' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
+        # with:
+        #     ruby-version: '2.5.8' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
       - name: install rubocop
         run: gem install rubocop
       - run: ruby test/ci_helper.rb
