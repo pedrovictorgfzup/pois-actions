@@ -7,11 +7,21 @@ on:
 
 
 jobs:
-    test:
+    deploy:
         runs-on: ubuntu-latest
         if: ${{ github.event_name == 'pull_request' && github.event.pull_request.labels[0].name == 'deploy'}}
         steps:
-            - name: Olar
-              run: |
-                  array = ${{ github.event.pull_request.labels }}
-                  echo "${array[*]}"
+          - name: Build
+            run: docker build .
+
+          - name: Login
+            run: echo ${{secrets.DOCKER_HUB_PSWD}} | docker login -u pedrovictorgfzup --password-stdin
+
+          - name: Tag versions
+            run: docker tag pedrovictorgfzup/test-repo:latest pedrovictorgfzup/test-repo:${{steps.get_version.outputs.VERSION}}
+
+          - name: Push Version
+            run: docker push pedrovictorgfzup/test-repo:${{steps.get_version.outputs.VERSION}}
+
+          - name: Push Latest
+            run: docker push pedrovictorgfzup/test-repo:latest
