@@ -12,6 +12,11 @@ jobs:
         if: ${{ github.event_name == 'pull_request' && github.event.pull_request.labels[0].name == 'deploy'}}
         steps:
           - uses: actions/checkout@v2
+          
+          - name: Get the version
+            id: get_version
+            run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+
           - name: Build
             run: docker build .
 
