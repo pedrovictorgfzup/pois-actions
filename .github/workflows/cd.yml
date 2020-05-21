@@ -2,15 +2,32 @@
 name: CD
 
 on:  
-  pull_request:
+  push:
     branches: [ master ]
 
 
 jobs:
-    
-    test:
-        if: ${{ github.event_name == 'pull_request' }}
+    deploy:
+        runs-on: ubuntu-latest
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.labels[0].name == 'deploy'}}
         steps:
-            - name: Olar
-              run: echo "Olha o troxa" 
-    
+          - uses: actions/checkout@v2
+          
+          - name: Get the version
+            id: get_version
+            run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+
+          - name: Build
+            run: docker build  -t pedrovictorgfzup/test-repo:latest .
+
+          - name: Login
+            run: echo ${{secrets.DOCKER_HUB_PSWD}} | docker login -u pedrovictorgfzup --password-stdin
+
+          - name: Tag versions
+            run: docker tag pedrovictorgfzup/test-repo:latest pedrovictorgfzup/test-repo:${{steps.get_version.outputs.VERSION}}
+
+          - name: Push Version
+            run: docker push pedrovictorgfzup/test-repo:${{steps.get_version.outputs.VERSION}}
+
+          - name: Push Latest
+            run: docker push pedrovictorgfzup/test-repo:latest
