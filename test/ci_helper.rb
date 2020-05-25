@@ -18,8 +18,11 @@ class Runner
 
       if pr_offenses["files"][0]["offenses"].size > master_offenses["files"][0]["offenses"].size
         print "Olha só"
+        exit 1
+      else
+        print "Deu bom"
+        exit 0
       end
-      binding.pry
     end
     private
 
