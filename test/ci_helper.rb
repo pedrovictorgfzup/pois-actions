@@ -12,8 +12,8 @@ class Runner
     end
 
     def execute
-      print "PR OFFENSES PO: ", pr_offenses, "\n"
-      print "MASTER OFFENSES PO: ", master_offenses, "\n"
+      print "PR OFFENSES PO: ", pr_offenses["files"], "\n"
+      print "MASTER OFFENSES PO: ", master_offenses["files"], "\n"
     end
     private
 
