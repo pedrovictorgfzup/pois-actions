@@ -2,7 +2,6 @@
 
 require 'json'
 require 'open3'
-require 'pry'
 
 class Runner
   class << self
