@@ -13,9 +13,11 @@ class Runner
 
     def execute
       pr_offenses = get_pr_offenses
+      print "PR SIZE: ", pr_offenses["summary"]["offense_count"].size
       master_offenses = get_master_offenses
+      print "MASTER SIZE: ", master_offenses["summary"]["offense_count"].size
 
-      binding.pry
+      
       if pr_offenses["summary"]["offense_count"].size > master_offenses["summary"]["offense_count"].size
         pr_offenses["files"].each do |file|
           print file
