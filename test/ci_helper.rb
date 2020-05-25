@@ -13,7 +13,10 @@ class Runner
 
     def execute
 
-      if pr_offenses["files"][0]["offenses"].size > master_offenses["files"][0]["offenses"].size
+      if pr_offenses["summary"]["offense_count"].size > master_offenses["summary"]["offense_count"].size
+        pr_offenses["files"].each do |file|
+          print file
+        end
         print "Olha só"
         exit 1
       else
@@ -56,15 +59,3 @@ class Runner
 end
 
 print Runner.execute
-
-
-
-
-
-
-
-
-
-
-
-
