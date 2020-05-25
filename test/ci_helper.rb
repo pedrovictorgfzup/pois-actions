@@ -19,12 +19,18 @@ class Runner
       print "MASTER OFFENSES: ", master_offenses["summary"]["offense_count"], "\n"
       print "MR: master_offenses"
 
+      report_hash = {}
       
       if pr_offenses["summary"]["offense_count"] > master_offenses["summary"]["offense_count"]
         pr_offenses["files"].each do |file|
-          print "oi"
+          report_hash[file["path"]] = file["offenses"]
         end
-        print "Olha só"
+
+        master_offenses["files"].each do |file|
+          report_hash[file["path"]] = report_hash[file["path"]] - file["offenses"]
+        end
+
+        print "Olha só: ", report_hash, "\n\n\n"
         exit 1
       else
         print "Deu bom"
@@ -50,6 +56,10 @@ class Runner
     end
   end
 end
+
+
+
+
 
 
 
