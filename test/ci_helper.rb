@@ -4,34 +4,44 @@ require 'json'
 
 class Runner
   class << self
+    attr_reader :offenses
+
+    def initialize
+      @offenses = {}
+    end
+
     def execute
-      commit_offenses = get_commit_offenses
-      previous_commit_offenses = get_previous_commit_offenses
-      print commit_offenses['summary'], "\n"
-      print previous_commit_offenses['summary'], "\n"
+      print pr_offenses
+      print master_offenses
+    end
+    private
 
-      if commit_offenses['summary']['offense_count'] > previous_commit_offenses['summary']['offense_count']
-        print('DEU ERRADO')
-        exit 1
-      else
-        print('DEU CERTO')
-        exit 0
-      end
-    end
-    
-    def files
-      @files ||= `git diff --name-only HEAD HEAD~1`.split("\n").select { |e| e =~ /.rb/ }
-    end
-  
-    def get_commit_offenses
-      JSON.parse(`rubocop --format json`)
+    attr_writer :offenses
+
+    def pr_offenses
+      pr_raw_data = `rubocop --format json #{files.join(' ')}`
+      new_offenses = pr_raw_data
     end
 
-    def get_previous_commit_offenses
-      `git checkout . && git checkout HEAD^`
-      JSON.parse(`rubocop --format json`)
+    def master_offenses
+      Open3.capture3('git checkout . && git checkout HEAD^')
+
+      master_raw_data = `rubocop --format json #{files.join(' ')}`
+      old_offenses = master_raw_data
+    end
+
+    def new_offenses
+      offenses[:new_offenses] || {}
+    end
+
+    def fixed_offenses
+      offenses[:fixed_offenses] || {}
+    end
+
+    def old_offenses
+      offenses[:old_offenses] || {}
     end
   end
 end
 
-print Runner.files
+print Runner.execute
