@@ -2,6 +2,7 @@
 
 require 'json'
 require 'open3'
+require 'pry'
 
 class Runner
   class << self
@@ -12,9 +13,9 @@ class Runner
     end
 
     def execute
-      print "PR OFFENSES PO: ", pr_offenses, "\n"
-      print "MASTER OFFENSES PO: ", master_offenses, "\n"
-      print "OFFENSES: ", offenses
+      print "PR OFFENSES PO: ", pr_offenses["files"], "\n"
+      print "MASTER OFFENSES PO: ", master_offenses["files"], "\n"
+      binding.pry
     end
     private
 
