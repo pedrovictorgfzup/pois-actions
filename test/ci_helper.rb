@@ -2,7 +2,7 @@
 
 require 'json'
 require 'open3'
-
+require 'pry'
 class Runner
   class << self
     attr_reader :offenses
@@ -12,7 +12,10 @@ class Runner
     end
 
     def execute
+      pr_offenses = get_pr_offenses
+      master_offenses = get_master_offenses
 
+      binding.pry
       if pr_offenses["summary"]["offense_count"].size > master_offenses["summary"]["offense_count"].size
         pr_offenses["files"].each do |file|
           print file
@@ -32,28 +35,14 @@ class Runner
       @files ||= `git diff --name-only HEAD HEAD~1`.split("\n").select { |e| e =~ /.rb/ }
     end
 
-    def pr_offenses
-      pr_raw_data = JSON.parse(`rubocop --format json #{files.join(' ')}`)
-      new_offenses = pr_raw_data
+    def get_pr_offenses
+      JSON.parse(`rubocop --format json #{files.join(' ')}`)
     end
 
-    def master_offenses
+    def get_master_offenses
       Open3.capture3('git checkout . && git checkout HEAD^')
 
-      master_raw_data = JSON.parse(`rubocop --format json #{files.join(' ')}`)
-      old_offenses = master_raw_data
-    end
-
-    def new_offenses
-      offenses[:new_offenses] || {}
-    end
-
-    def fixed_offenses
-      offenses[:fixed_offenses] || {}
-    end
-
-    def old_offenses
-      offenses[:old_offenses] || {}
+      JSON.parse(`rubocop --format json #{files.join(' ')}`)
     end
   end
 end
