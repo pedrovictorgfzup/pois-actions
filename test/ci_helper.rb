@@ -18,6 +18,10 @@ class Runner
 
     attr_writer :offenses
 
+    def files
+      @files ||= `git diff --name-only HEAD HEAD~1`.split("\n").select { |e| e =~ /.rb/ }
+    end
+    
     def pr_offenses
       pr_raw_data = `rubocop --format json #{files.join(' ')}`
       new_offenses = pr_raw_data
