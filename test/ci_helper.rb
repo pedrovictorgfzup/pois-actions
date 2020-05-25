@@ -12,8 +12,6 @@ class Runner
     end
 
     def execute
-      print "PR OFFENSES PO: ", pr_offenses["files"], "\n"
-      print "MASTER OFFENSES PO: ", master_offenses["files"], "\n"
 
       if pr_offenses["files"][0]["offenses"].size > master_offenses["files"][0]["offenses"].size
         print "Olha só"
