@@ -27,4 +27,8 @@ RSpec.describe PointOfInterest do
     poi.y = 3
     expect(poi).to be_invalid
   end
+
+  it 'is only an empty test' do
+    expect(true).to_equals true
+  end
 end

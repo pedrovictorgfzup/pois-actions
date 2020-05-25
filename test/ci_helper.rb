@@ -18,7 +18,11 @@ class Runner
         exit 0
       end
     end
-
+    
+    def files
+      @files ||= `git diff --name-only HEAD HEAD~1`.split("\n").select { |e| e =~ /.rb/ }
+    end
+  
     def get_commit_offenses
       JSON.parse(`rubocop --format json`)
     end
@@ -30,4 +34,4 @@ class Runner
   end
 end
 
-Runner.execute
+print Runner.files
