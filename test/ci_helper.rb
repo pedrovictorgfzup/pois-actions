@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'json'
+require 'open3'
 
 class Runner
   class << self
@@ -11,8 +12,8 @@ class Runner
     end
 
     def execute
-      print pr_offenses
-      print master_offenses
+      print "PR OFFENSES PO: ", pr_offenses, "\n"
+      print "MASTER OFFENSES PO: ", master_offenses, "\n"
     end
     private
 
@@ -21,7 +22,7 @@ class Runner
     def files
       @files ||= `git diff --name-only HEAD HEAD~1`.split("\n").select { |e| e =~ /.rb/ }
     end
-    
+
     def pr_offenses
       pr_raw_data = `rubocop --format json #{files.join(' ')}`
       new_offenses = pr_raw_data
