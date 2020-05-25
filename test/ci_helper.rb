@@ -13,12 +13,12 @@ class Runner
 
     def execute
       pr_offenses = get_pr_offenses
-      print "PR SIZE: ", pr_offenses["summary"]["offense_count"].size
+      print "PR OFFENSES: ", pr_offenses["summary"]["offense_count"]
       master_offenses = get_master_offenses
-      print "MASTER SIZE: ", master_offenses["summary"]["offense_count"].size
+      print "MASTER OFFENSES: ", master_offenses["summary"]["offense_count"]
 
       
-      if pr_offenses["summary"]["offense_count"].size > master_offenses["summary"]["offense_count"].size
+      if pr_offenses["summary"]["offense_count"] > master_offenses["summary"]["offense_count"]
         pr_offenses["files"].each do |file|
           print file
         end
@@ -48,6 +48,12 @@ class Runner
     end
   end
 end
+
+
+
+
+
+
 
 
 
