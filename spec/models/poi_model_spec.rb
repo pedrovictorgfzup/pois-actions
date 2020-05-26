@@ -31,5 +31,3 @@ RSpec.describe PointOfInterest do
     expect(true).to_equals true
   end
 end
-
-
