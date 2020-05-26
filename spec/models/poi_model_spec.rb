@@ -3,11 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe PointOfInterest do
-  it 'is valid with valid attributes' do 
-    poi = PointOfInterest.new
+  it 'is valid with valid attributes' do poi = PointOfInterest.new
     poi.x = 2
-    poi.y = 3
-    poi.name = 'Valid point of interest name'
+              poi.y = 3
+      poi.name = 'Valid point of interest name'
     expect(poi).to be_valid
   end
 
