@@ -47,4 +47,4 @@ jobs:
             ruby-version: '2.5.8' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
       - name: install rubocop
         run: gem install rubocop
-      - run: ruby test/ci_helper.rb
+      - run: ruby test/ci_helper.rb ${{ github.base_ref }}

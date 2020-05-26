@@ -3,6 +3,8 @@
 require 'json'
 require 'open3'
 
+target_branch = ARGV[0]
+
 class Runner
   class << self
     attr_reader :offenses
@@ -72,7 +74,7 @@ class Runner
     attr_writer :offenses
 
     def files
-      @files ||= `git diff --name-only HEAD HEAD~1`.split("\n").select { |e| e =~ /.rb/ }
+      @files ||= `git diff --name-only HEAD #{target_branch}`.split("\n").select { |e| e =~ /.rb/ }
     end
 
     def get_pr_offenses
@@ -80,11 +82,12 @@ class Runner
     end
 
     def get_master_offenses
-      Open3.capture3('git checkout . && git checkout HEAD^')
+      Open3.capture3("git checkout #{target_branch}")
 
       JSON.parse(`rubocop --format json #{files.join(' ')}`)
     end
   end
 end
 
+print target_branch
 Runner.execute
