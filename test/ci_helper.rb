@@ -2,7 +2,7 @@
 
 require 'json'
 require 'open3'
-require 'pry'
+
 class Runner
   class << self
     attr_reader :offenses
@@ -86,20 +86,5 @@ class Runner
     end
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 Runner.execute
