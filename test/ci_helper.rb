@@ -88,5 +88,4 @@ class Runner
   end
 end
 
-print target_branch
 Runner.execute
