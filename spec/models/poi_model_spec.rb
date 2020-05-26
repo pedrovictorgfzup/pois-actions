@@ -3,8 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe PointOfInterest do
-  it 'is valid with valid attributes' do 
-    poi = PointOfInterest.new
+  it 'is valid with valid attributes' do poi = PointOfInterest.new
     poi.x = 2
     poi.y = 3
     poi.name = 'Valid point of interest name'
@@ -31,3 +30,5 @@ RSpec.describe PointOfInterest do
     expect(true).to_equals true
   end
 end
+
+
