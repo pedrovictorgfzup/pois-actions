@@ -45,4 +45,31 @@ RSpec.describe PoiInteractor do
     expect(result).to_not be_nil
     expect(result.size).to be == 1
   end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 end
