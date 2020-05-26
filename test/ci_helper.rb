@@ -14,7 +14,7 @@ class Runner
 
     def execute(target)
       @target_branch = target
-      
+
       pr_offenses = get_pr_offenses
       print "AFTER PR: ", files, "\n"
       master_offenses = get_master_offenses
@@ -78,7 +78,7 @@ class Runner
     attr_writer :offenses
 
     def files
-      @files ||= `git diff --name-only HEAD #{@target_branch}`.split("\n").select { |e| e =~ /.rb/ }
+      @files ||= `git diff --name-only HEAD origin/#{@target_branch}`.split("\n").select { |e| e =~ /.rb/ }
     end
 
     def get_pr_offenses
