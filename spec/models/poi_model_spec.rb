@@ -3,12 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe PointOfInterest do
-  it 'is valid with valid attributes' do
-    poi = PointOfInterest.new
+  it 'is valid with valid attributes' do poi = PointOfInterest.new
     poi.x = 2
-    poi.y = 3
-    poi.name = 'Valid point of interest name'
-
+              poi.y = 3
+      poi.name = 'Valid point of interest name'
     expect(poi).to be_valid
   end
 
@@ -26,5 +24,9 @@ RSpec.describe PointOfInterest do
     poi.x = 2
     poi.y = 3
     expect(poi).to be_invalid
+  end
+
+  it 'is only an empty test' do
+    expect(true).to_equals true
   end
 end
