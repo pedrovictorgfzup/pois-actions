@@ -64,6 +64,7 @@ class Runner
         end
         exit 1
       else
+        puts files
         print "Deu bom"
         exit 0
       end
