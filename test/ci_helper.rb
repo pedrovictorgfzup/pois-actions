@@ -46,6 +46,15 @@ class Runner
 
         print "Olha só pr: ", pr_report_hash, "\n\n\n"
         print "Olha só master: ", master_report_hash, "\n\n\n"
+
+        pr_report_hash.each do |file, offenses|
+
+          offenses.each do |cop_name, quantity|
+            result = quantity - (master_report_hash[file][cop_name] || 0)
+            print "#{cop_name} #{result} were added to #{file}"
+          end
+
+        end
         exit 1
       else
         print "Deu bom"
