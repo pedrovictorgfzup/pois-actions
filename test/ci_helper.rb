@@ -6,15 +6,19 @@ require 'open3'
 
 class Runner
   class << self
-    attr_reader :offenses
+    attr_accessor :target_branch
 
     def initialize
       @target_branch = ARGV[0]
     end
 
-    def execute
+    def execute(target)
+      @target_branch = target
+      
       pr_offenses = get_pr_offenses
+      print "AFTER PR: ", files, "\n"
       master_offenses = get_master_offenses
+      print "AFTER MASTER: ", files, "\n"
 
       pr_report_hash = {}
       master_report_hash = {}
@@ -64,7 +68,7 @@ class Runner
         end
         exit 1
       else
-        puts files
+        print files, "\n"
         print "Deu bom"
         exit 0
       end
@@ -89,4 +93,4 @@ class Runner
   end
 end
 
-Runner.execute
+Runner.execute(ARGV[0])
