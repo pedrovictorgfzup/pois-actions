@@ -51,7 +51,13 @@ class Runner
 
           offenses.each do |cop_name, quantity|
             result = quantity - (master_report_hash[file][cop_name] || 0)
-            print "#{cop_name} #{result} were added to #{file}"
+            if result > 0
+              print "#{result} #{cop_name} were added to #{file}"
+              puts
+            elsif result < 0
+              print "#{result} #{cop_name} were fixed in #{file}"
+              puts
+            end
           end
 
         end
@@ -81,40 +87,4 @@ class Runner
   end
 end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-print Runner.execute
+Runner.execute
