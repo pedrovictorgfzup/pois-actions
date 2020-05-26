@@ -40,7 +40,7 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-      - run: git fetch origin master
+      - run: git fetch origin ${{ github.base_ref }}
       - uses: actions/setup-ruby@v1
         with:
             ruby-version: '2.5.8' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
