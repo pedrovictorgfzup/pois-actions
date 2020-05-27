@@ -17,12 +17,12 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      # - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
       # - uses: ruby/setup-ruby@v1.33.1
         # with:
         #     ruby-version: '2.5.8' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
-      - name: Checking out to branch
-        run: git checkout ${{ github.head_ref }}
+      # - name: Checking out to branch
+      #   run: git checkout ${{ github.head_ref }}
       - name: Deploying containers
         run: |
               docker-compose build
@@ -39,9 +39,9 @@ jobs:
     runs-on: self-hosted
     
     steps:
-      # - uses: actions/checkout@v2
-      - name: Checking out to branch
-        run: git checkout ${{ github.head_ref }}
+      - uses: actions/checkout@v2
+      # - name: Checking out to branch
+        # run: git checkout ${{ github.head_ref }}
       - run: git fetch origin ${{ github.base_ref }}
       # - uses: actions/setup-ruby@v1
       #   with:
