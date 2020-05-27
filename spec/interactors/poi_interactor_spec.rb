@@ -43,7 +43,7 @@ RSpec.describe PoiInteractor do
     result = PoiInteractor.instance.get_pois_inside_radius(12, 12, 5)
 
     expect(result).to_not be_nil
-    expect(result.size).to be == 2
+    expect(result.size).to be == 1
   end
 
 
