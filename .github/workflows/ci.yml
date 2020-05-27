@@ -40,10 +40,13 @@ jobs:
     
     steps:
       # - uses: actions/checkout@v2
+      - name: Checking out to branch
+        run: git checkout ${{ github.head_ref }}
       - run: git fetch origin ${{ github.base_ref }}
       # - uses: actions/setup-ruby@v1
       #   with:
       #       ruby-version: '2.5.8' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
+      - run: ls
       - name: install rubocop
         run: gem install rubocop
       - run: ruby test/ci_helper.rb ${{ github.base_ref }}
