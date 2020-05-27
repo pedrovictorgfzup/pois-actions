@@ -37,7 +37,7 @@ jobs:
     runs-on: self-hosted
     
     steps:
-      - uses: actions/checkout@v2
+      # - uses: actions/checkout@v2
       - run: git fetch origin ${{ github.base_ref }}
       # - uses: actions/setup-ruby@v1
       #   with:
