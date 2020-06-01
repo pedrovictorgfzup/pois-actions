@@ -12,36 +12,43 @@ on:
 jobs:
   
   # This workflow contains a single job called "build"
-  # build:
-  #   # The type of runner that the job will run on
-  #   runs-on: ubuntu-latest
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     # - uses: ruby/setup-ruby@v1.33.1
-  #       # with:
-  #       #     ruby-version: '2.5.8' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
-  #     - name: Deploying containers
-  #       run: |
-  #             docker-compose build
-  #             docker-compose run web rails db:drop
-  #             docker-compose run web rails db:create
-  #             docker-compose run web rails db:migrate RAILS_ENV=test
-  #             docker-compose run web rails db:test:prepare RAILS_ENV=test
-  #             docker-compose run web rails db:seed RAILS_ENV=test
+    steps:
+      - uses: actions/checkout@v2
+      # - uses: ruby/setup-ruby@v1.33.1
+        # with:
+        #     ruby-version: '2.5.8' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
+      # - name: Checking out to branch
+      #   run: git checkout ${{ github.head_ref }}
+      - name: Deploying containers
+        run: |
+              docker-compose build
+              docker-compose run web rails db:drop
+              docker-compose run web rails db:create
+              docker-compose run web rails db:migrate RAILS_ENV=test
+              docker-compose run web rails db:test:prepare RAILS_ENV=test
+              docker-compose run web rails db:seed RAILS_ENV=test
 
-  #     - name: Run tests
-  #       run: docker-compose run web bundle exec rspec --format doc
+      - name: Run tests
+        run: docker-compose run web bundle exec rspec --format doc
         
   linter:
     runs-on: ubuntu-latest
     
     steps:
       - uses: actions/checkout@v2
+      # - name: Checking out to branch
+        # run: git checkout ${{ github.head_ref }}
       - run: git fetch origin ${{ github.base_ref }}
-      - uses: actions/setup-ruby@v1
+      # - uses: actions/setup-ruby@v1
+      #   with:
+      #       ruby-version: '2.5.8' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
+      # - name: install rubocop
+      #   run: gem install rubocop
+      # - run: ruby test/ci_helper.rb ${{ github.base_ref }}
+      - uses: ./actions/linter_action
         with:
-            ruby-version: '2.5.8' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
-      - name: install rubocop
-        run: gem install rubocop
-      - run: ruby test/ci_helper.rb ${{ github.base_ref }}
+          target-branch: ${{ github.base_ref }}
