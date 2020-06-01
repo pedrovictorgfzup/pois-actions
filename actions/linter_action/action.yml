@@ -1,0 +1,12 @@
+# action.yml
+name: 'Linter action'
+description: 'Runs rubocop on the base and target branches and find new offenses'
+inputs:
+  target-branch: 
+    description: 'The target branch of the pull request'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.target-branch }}

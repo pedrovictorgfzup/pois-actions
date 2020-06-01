@@ -1,7 +1,7 @@
 require 'json'
 require 'open3'
 
-class Runner
+class LinterRunner
   class << self
 
     def execute()
@@ -70,4 +70,4 @@ class Runner
   end
 end
 
-Runner.execute
+LinterRunner.execute
