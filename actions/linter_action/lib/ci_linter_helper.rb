@@ -1,6 +1,5 @@
 require 'json'
 require 'open3'
-require_relative 'rubocop_loader'
 
 class LinterRunner
   class << self
