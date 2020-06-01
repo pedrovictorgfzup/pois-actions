@@ -1,8 +1,6 @@
 require 'json'
 require 'open3'
-require 'rubocop'
-require 'rubocop-rspec'
-require 'rubocop-performance'
+require_relative 'rubocop_loader'
 
 class LinterRunner
   class << self
