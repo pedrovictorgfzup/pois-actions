@@ -1,4 +1,4 @@
-FROM ruby:2.5.8-alpine
+FROM ruby:2.5.8
 
 RUN apk add --update build-base git
 RUN chmod +x lib/entrypoint.sh
