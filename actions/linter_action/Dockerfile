@@ -7,6 +7,5 @@ RUN gem install bundler
 
 COPY lib /action/lib
 RUN chmod +x /action/lib/entrypoint.sh
-RUN rubocop
 
 ENTRYPOINT ["/action/lib/entrypoint.sh"]
