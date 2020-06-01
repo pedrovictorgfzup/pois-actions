@@ -5,21 +5,15 @@ class LinterRunner
   class << self
 
     def execute()
-      puts "I'm running"
       source_offenses = source_branch_offenses
-      puts "Source offenses ok"
       target_offenses = target_branch_offenses
-      puts "Target offenses ok"
       
       if source_offenses.fetch('summary').fetch('offense_count') > target_offenses.fetch('summary').fetch('offense_count')
         source_branch_report = calculate_report_hash(source_offenses)
-        puts "Getting source report ok"
         target_branch_report = calculate_report_hash(target_offenses)
-        puts "Getting target report ok"
 
         show_offenses_added(source_branch_report, target_branch_report)
         
-        puts "I'm leaving here"
         exit 1
       else
         puts 'Congrats, you\'ve managed to not increase the number of offenses!'
@@ -74,10 +68,8 @@ class LinterRunner
           end
         end
       end
-      puts "I'm naugthy bit o code"
     end
   end
 end
-
 
 LinterRunner.execute
