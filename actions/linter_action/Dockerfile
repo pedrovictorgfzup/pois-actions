@@ -1,5 +1,7 @@
 FROM ruby:2.5.8-alpine
 
+RUN chmod +x /lib/entrypoint.sh
+
 RUN apk add --update build-base git
 
 RUN gem install bundler
