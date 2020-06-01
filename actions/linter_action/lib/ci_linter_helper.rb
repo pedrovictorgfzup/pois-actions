@@ -56,42 +56,20 @@ class LinterRunner
     end
 
     def show_offenses_added(source_branch_report, target_branch_report)
-      source_branch_report.each do |file, offenses|
+      if !source_branch_report.nil? && target_branch_report.nil?
+        source_branch_report.each do |file, offenses|
 
-        offenses.each do |cop_name, quantity|
-          result = quantity - (target_branch_report[file][cop_name] || 0)
-          if result > 0
-            print "#{result} #{cop_name} were added to #{file}"
-            puts
+          offenses.each do |cop_name, quantity|
+            result = quantity - (target_branch_report[file][cop_name] || 0)
+            if result > 0
+              print "#{result} #{cop_name} were added to #{file}"
+              puts
+            end
           end
         end
       end
     end
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 LinterRunner.execute
