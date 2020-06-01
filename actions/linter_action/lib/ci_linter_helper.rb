@@ -72,4 +72,5 @@ class LinterRunner
   end
 end
 
+
 LinterRunner.execute
