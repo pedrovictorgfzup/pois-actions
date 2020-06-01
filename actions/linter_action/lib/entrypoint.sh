@@ -1,4 +1,5 @@
+#!/bin/sh -l
 
 set -e
 
-ruby /action/lib/ci_linter_helper.rb $1
+ruby /action/lib/ci_linter_helper.rb
