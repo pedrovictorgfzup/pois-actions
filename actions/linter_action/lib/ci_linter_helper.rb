@@ -5,6 +5,7 @@ class LinterRunner
   class << self
 
     def execute()
+      puts "I'm running"
       source_offenses = source_branch_offenses
       target_offenses = target_branch_offenses
       
