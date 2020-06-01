@@ -62,7 +62,7 @@ class LinterRunner
     end
 
     def show_offenses_added(source_branch_report, target_branch_report)
-      if !source_branch_report.nil? && target_branch_report.nil?
+      if !source_branch_report.nil? && !target_branch_report.nil?
         source_branch_report.each do |file, offenses|
 
           offenses.each do |cop_name, quantity|
