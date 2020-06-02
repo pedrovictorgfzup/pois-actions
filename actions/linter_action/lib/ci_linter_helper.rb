@@ -6,7 +6,9 @@ class LinterRunner
 
     def execute()
       source_offenses = source_branch_offenses
+      print "SOURCE OFFENSES: ", source_offenses, "\n"
       target_offenses = target_branch_offenses
+      print "TARGET OFFENSES: ", target_offenses, "\n"
       
       if source_offenses.fetch('summary').fetch('offense_count') > target_offenses.fetch('summary').fetch('offense_count')
         source_branch_report = calculate_report_hash(source_offenses)
@@ -28,24 +30,27 @@ class LinterRunner
     end
 
     def source_branch_offenses
+      print "FILES IN SOURCE BRANCH: ", files, "\n"
+      print "COMMAND RUN: ", "rubocop --format json #{files.join(' ')}", "\n"
       JSON.parse(`rubocop --format json #{files.join(' ')}`)
     end
 
     def target_branch_offenses
       Open3.capture3("git checkout #{ARGV[0]}")
 
+      print "FILES IN TARGET BRANCH: ", files, "\n"
+      print "COMMAND RUN: ", "rubocop --format json #{files.join(' ')}", "\n"
       JSON.parse(`rubocop --format json #{files.join(' ')}`)
     end
 
     def calculate_report_hash(offense_hash)
       report_hash = {}
 
-      offense_hash.fetch('files').each do |file|
-        report_hash[file.fetch('path')] = {}
+      offense_hash.fetch('files').each do |file| report_hash[file.fetch('path')] = {}
 
         file.fetch('offenses').each do |offense|
-          if report_hash.fetch(file.fetch('path')).key?(offense.fetch('cop_name'))
-            report_hash[file.fetch('path')][offense.fetch('cop_name')] += 1
+          if report_hash.fetch(file.fetch('path')).key?(offense.fetch('cop_name')) 
+          report_hash[file.fetch('path')][offense.fetch('cop_name')] += 1
           else
             report_hash[file.fetch('path')][offense.fetch('cop_name')] = 1
           end
@@ -67,7 +72,7 @@ class LinterRunner
             end
           end
         end
-      end
+      end      
     end
   end
 end
