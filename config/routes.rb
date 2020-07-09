@@ -6,3 +6,6 @@ Rails.application.routes.draw do
 
   get 'nearby_pois', to: 'poi#get_pois_inside_radius', constraints: { x: /\d*/, y: /\d*/, radius: /\d*/ }
 end
+
+
+
