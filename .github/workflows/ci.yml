@@ -51,6 +51,8 @@ jobs:
       # - name: install rubocop
       #   run: gem install rubocop
       # - run: ruby test/ci_helper.rb ${{ github.base_ref }}
+      - name: Entering root user
+        run: sudo su
       - uses: ./actions/linter_action
         with:
           target-branch: ${{ github.base_ref }}
