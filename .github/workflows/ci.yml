@@ -23,6 +23,8 @@ jobs:
         #     ruby-version: '2.5.8' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
       # - name: Checking out to branch
       #   run: git checkout ${{ github.head_ref }}
+      - name: Entering root user
+        run: sudo su
       - name: Deploying containers
         run: |
               docker-compose build
