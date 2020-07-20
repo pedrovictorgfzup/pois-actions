@@ -23,17 +23,18 @@ jobs:
         #     ruby-version: '2.5.8' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
       # - name: Checking out to branch
       #   run: git checkout ${{ github.head_ref }}
+
       - name: Deploying containers
         run: |
-              docker-compose build
-              docker-compose run web rails db:drop
-              docker-compose run web rails db:create
-              docker-compose run web rails db:migrate RAILS_ENV=test
-              docker-compose run web rails db:test:prepare RAILS_ENV=test
-              docker-compose run web rails db:seed RAILS_ENV=test
+              sudo docker-compose build
+              sudo docker-compose run web rails db:drop
+              sudo docker-compose run web rails db:create
+              sudo docker-compose run web rails db:migrate RAILS_ENV=test
+              sudo docker-compose run web rails db:test:prepare RAILS_ENV=test
+              sudo docker-compose run web rails db:seed RAILS_ENV=test
 
       - name: Run tests
-        run: docker-compose run web bundle exec rspec --format doc
+        run: sudo docker-compose run web bundle exec rspec --format doc
         
   linter:
     runs-on: self-hosted
@@ -49,6 +50,8 @@ jobs:
       # - name: install rubocop
       #   run: gem install rubocop
       # - run: ruby test/ci_helper.rb ${{ github.base_ref }}
+      - name: Entering root user
+        run: sudo su
       - uses: ./actions/linter_action
         with:
           target-branch: ${{ github.base_ref }}
